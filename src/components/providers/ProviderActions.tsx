@@ -43,6 +43,7 @@ interface ProviderActionsProps {
   // OpenClaw: default model
   isDefaultModel?: boolean;
   onSetAsDefault?: () => void;
+  disableOpenTerminal?: boolean;
 }
 
 export function ProviderActions({
@@ -69,6 +70,7 @@ export function ProviderActions({
   // OpenClaw: default model
   isDefaultModel = false,
   onSetAsDefault,
+  disableOpenTerminal = false
 }: ProviderActionsProps) {
   const { t } = useTranslation();
   const iconButtonClass = "h-8 w-8 p-1";
@@ -214,6 +216,8 @@ export function ProviderActions({
     defaultValue: "由 Hermes 管理，请在 Hermes Web UI 中编辑",
   });
 
+  let isConfirmed = false
+
   return (
     <div className="flex items-center gap-1.5">
       {(appId === "openclaw" || appId === "hermes") &&
@@ -319,7 +323,7 @@ export function ProviderActions({
           <Button
             size="icon"
             variant="ghost"
-            onClick={onOpenTerminal}
+            onClick={disableOpenTerminal ? void 0 : onOpenTerminal}
             title={t("provider.openTerminal", "打开终端")}
             className={cn(
               iconButtonClass,

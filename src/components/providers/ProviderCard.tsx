@@ -560,6 +560,14 @@ export function ProviderCard({
               // OpenClaw: default model
               isDefaultModel={isDefaultModel}
               onSetAsDefault={onSetAsDefault}
+              disableOpenTerminal = {codexNeedsRouting || 
+                  (appId === "claude" &&
+                    provider.category !== "official" &&
+                    provider.meta?.apiFormat &&
+                    provider.meta.apiFormat !== "anthropic" ) || 
+                  (appId === "claude-desktop" &&
+                    provider.category !== "official" &&
+                    provider.meta?.claudeDesktopMode === "proxy")}
             />
           </div>
         </div>
